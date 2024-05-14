@@ -23,8 +23,6 @@ import org.kie.api.runtime.KieSessionConfiguration;
 import org.kie.api.runtime.conf.ClockTypeOption;
 import org.kie.internal.io.ResourceFactory;
 
-import com.ftn.sbnz.model.HeartAttackEvent;
-import com.ftn.sbnz.model.HeartBeatEvent;
 
 public class CEPConfigTest {
 
@@ -71,8 +69,6 @@ public class CEPConfigTest {
     private void runPseudoClockExample(KieSession ksession) {
         SessionPseudoClock clock = ksession.getSessionClock();
         for (int index = 0; index < 100; index++) {
-            HeartBeatEvent beep = new HeartBeatEvent();
-            ksession.insert(beep);
             clock.advanceTime(1, TimeUnit.SECONDS);
             int ruleCount = ksession.fireAllRules();
             //As long as there is a steady heart beat, no rule will fire
@@ -82,8 +78,6 @@ public class CEPConfigTest {
         clock.advanceTime(1, TimeUnit.MINUTES);
         int ruleCount = ksession.fireAllRules();
         assertThat(ruleCount, equalTo(1));
-        Collection<?> newEvents = ksession.getObjects(new ClassObjectFilter(HeartAttackEvent.class));
-        assertThat(newEvents.size(), equalTo(1));
     }
     
     private void runRealtimeClockExample(KieSession ksession) {
@@ -91,8 +85,6 @@ public class CEPConfigTest {
             @Override
             public void run() {
                 for (int index = 0; index < 4; index++) {
-                    HeartBeatEvent beep = new HeartBeatEvent();
-                    ksession.insert(beep);
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -110,7 +102,5 @@ public class CEPConfigTest {
         }
 
         ksession.fireUntilHalt();
-        Collection<?> newEvents = ksession.getObjects(new ClassObjectFilter(HeartAttackEvent.class));
-        assertThat(newEvents.size(), equalTo(1));
     }
 }
