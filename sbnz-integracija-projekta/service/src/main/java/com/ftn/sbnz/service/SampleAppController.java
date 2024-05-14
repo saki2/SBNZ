@@ -15,12 +15,12 @@ import com.ftn.sbnz.model.Item;
 public class SampleAppController {
 	private static Logger log = LoggerFactory.getLogger(SampleAppController.class);
 
-	private final SampleAppService sampleService;
+	//private final SampleAppService sampleService;
 
-	@Autowired
-	public SampleAppController(SampleAppService sampleService) {
-		this.sampleService = sampleService;
-	}
+	//@Autowired
+	//public SampleAppController(SampleAppService sampleService) {
+	//	this.sampleService = sampleService;
+	//}
 
 	@RequestMapping(value = "/item", method = RequestMethod.GET, produces = "application/json")
 	public Item getQuestions(@RequestParam(required = true) String id, @RequestParam(required = true) String name,
@@ -30,10 +30,11 @@ public class SampleAppController {
 
 		log.debug("Item request received for: " + newItem);
 
-		Item i2 = sampleService.getClassifiedItem(newItem);
+	//	Item i2 = sampleService.getClassifiedItem(newItem);
 
-		return i2;
-	}
+	//	return i2;
+		return null;
+}
 	
 	
 	
