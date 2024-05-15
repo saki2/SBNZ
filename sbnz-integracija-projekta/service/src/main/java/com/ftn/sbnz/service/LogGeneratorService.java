@@ -20,6 +20,7 @@ public class LogGeneratorService {
     @Autowired
     private LogReceiverService logReceiverService;
 
+    // salje svakih 5 sekundi request na LogReceiver log je generisan random 
     @Scheduled(fixedRate = 5000)
     public void generateLog() {
         LogEntry logEntry = new LogEntry(

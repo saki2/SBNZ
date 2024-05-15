@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class LogReceiverService {
     private static final Logger log = LoggerFactory.getLogger(LogReceiverService.class);
 
+    //ispisuje log
     public void receiveLog(LogEntry logEntry) {
         log.info("Received LogEntry: {}", logEntry);
     }

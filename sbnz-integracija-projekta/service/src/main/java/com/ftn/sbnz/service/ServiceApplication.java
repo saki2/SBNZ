@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//nisam stigao da dodam pravila pokusao sam al jebao me ovaj kieSession
 @SpringBootApplication
 @EnableScheduling
 public class ServiceApplication {

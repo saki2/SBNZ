@@ -2,6 +2,7 @@ package com.ftn.sbnz.model;
 
 import java.io.Serializable;
 
+//ovaj model treba da se unapredi jer ne postoji jos threat type 
 public class Threat implements Serializable{
     
     private int id;
