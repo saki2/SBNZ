@@ -46,6 +46,12 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		 <dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.11.2</version>
+			<scope>test</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hamcrest</groupId>
@@ -80,6 +86,12 @@
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-compiler</artifactId>
+			<version>${drools.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-templates</artifactId>
 			<version>${drools.version}</version>
 		</dependency>
 	</dependencies>

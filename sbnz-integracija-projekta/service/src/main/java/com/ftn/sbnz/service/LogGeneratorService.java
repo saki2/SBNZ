@@ -26,7 +26,7 @@ public class LogGeneratorService {
         LogEntry logEntry = new LogEntry(
                 idCounter++,
                 new Date(),
-                "Source-" + random.nextInt(100),
+                "Source-" + random.nextInt(10),
                 "192.168.1." + random.nextInt(256),
                 LogType.values()[random.nextInt(LogType.values().length)],
                 "Random log content " + random.nextInt(1000)

@@ -1,0 +1,63 @@
+package basicRules;
+
+import java.util.Date;
+import com.ftn.sbnz.model.LogEntry;
+import com.ftn.sbnz.model.Threat;
+import com.ftn.sbnz.model.ThreatType;
+import com.ftn.sbnz.model.RiskLevel;
+import com.ftn.sbnz.model.Mitigation;
+import com.ftn.sbnz.model.Alarm;
+import com.ftn.sbnz.service.LogReceiverService;
+
+
+rule "Test rule"
+when
+    $l : LogEntry()
+then
+    System.out.println("Received one Log Entry!");
+end
+
+rule "Detect Trojan Virus by keywords"
+when
+    $l : LogEntry(content matches ".*\\b(execute|install|setup|javascript|<script>)\\b.*")
+then
+    Threat $t = new Threat($l.getId(), ThreatType.TROJAN.getDescription(), RiskLevel.Medium, ThreatType.TROJAN, new LogEntry[]{$l});
+    insert($t);      
+end
+
+rule "Create Mitigation and Alarm for Threat"
+when
+    $t : Threat()
+then
+    Mitigation $m = new Mitigation($t.getId(), $t.getThreatType().getMitigation(), $t);
+    Alarm $a = new Alarm($m.getId(), new Date(), $t.getDescription(), $m);
+    insert($a); 
+end
+
+rule "Detect MITM by IP address change"
+no-loop true
+when
+    $l : LogEntry()
+    $pl : LogEntry(source == $l.source, ipAddress != $l.ipAddress)
+    not(Threat(logEntries contains $l, logEntries contains $pl))
+then
+    Threat $t = new Threat($l.getId(), ThreatType.MITM.getDescription(), RiskLevel.High, ThreatType.MITM, new LogEntry[]{$l, $pl});
+    insert($t);  
+end
+
+rule "Detect Phishing by similar source name"
+when
+    $l : LogEntry()
+    $pl : LogEntry(source != $l.source && source.toLowerCase().contains($l.source.toLowerCase()))
+then
+    Threat $t = new Threat($l.getId(), ThreatType.PHISHING.getDescription(), RiskLevel.Medium, ThreatType.PHISHING, new LogEntry[]{$l, $pl});
+    insert($t);  
+end
+
+rule "Detect Dependency Injection by unauthorized changes"
+when
+    $l : LogEntry(content matches ".*\\b(dependency|injection|unauthorized)\\b.*")
+then
+    Threat $t = new Threat($l.getId(), ThreatType.DEPENDENCY_INJECTION.getDescription(), RiskLevel.High, ThreatType.DEPENDENCY_INJECTION, new LogEntry[]{$l});
+    insert($t);  
+end

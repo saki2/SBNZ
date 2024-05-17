@@ -41,4 +41,21 @@ public class LogEntry implements Serializable {
     public void setLogType(LogType logType) { this.logType = logType; }
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
+
+    @Override
+    public String toString() {
+        return "LogEntry{" +
+                "id=" + id +
+                ", timestamp=" + timestamp +
+                ", source='" + source + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", logType=" + logType +
+                ", content='" + content + '\'' +
+                '}';
+    }
+    
+    // TODO: čitanje podataka iz fajlova i konvertovanje u objekte LogEntry
+    public LogEntry parse(String logEntry){
+        return null;
+    }
 }
