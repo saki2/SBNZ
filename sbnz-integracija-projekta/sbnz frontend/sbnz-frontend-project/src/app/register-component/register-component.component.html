@@ -1,25 +1,26 @@
+<!-- src/app/register/register.component.html -->
 <div class="register-container">
-    <h2>Register</h2>
-    <form (ngSubmit)="onRegister()">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" [(ngModel)]="name" name="name" required />
-      </div>
-      <div class="form-group">
-        <label for="surname">Surname</label>
-        <input type="text" id="surname" [(ngModel)]="surname" name="surname" required />
-      </div>
-      <div class="form-group">
-        <label for="gmail">Gmail</label>
-        <input type="email" id="gmail" [(ngModel)]="gmail" name="gmail" required />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password" required />
-      </div>
-      <div class="button-group">
-        <button type="submit">Register</button>
-        <button type="button" (click)="goToLogin()">Go to Login</button>
-      </div>
-    </form>
-  </div>
+  <h2>Register</h2>
+  <form (ngSubmit)="onRegister()">
+    <mat-form-field class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" id="name" [(ngModel)]="name" name="name" required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Surname</mat-label>
+      <input matInput type="text" id="surname" [(ngModel)]="surname" name="surname" required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Gmail</mat-label>
+      <input matInput type="email" id="gmail" [(ngModel)]="gmail" name="gmail" required />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" id="password" [(ngModel)]="password" name="password" required />
+    </mat-form-field>
+    <div class="button-group">
+      <button mat-raised-button color="primary" type="submit">Register</button>
+      <button mat-button type="button" (click)="goToLogin()">Go to Login</button>
+    </div>
+  </form>
+</div>
